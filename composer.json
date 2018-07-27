@@ -1,5 +1,5 @@
 {
-    "name" : "sam09torres/ApiBundle",
+    "name" : "sam09torres/apibundle",
     "description" : "Bundle to control any Api",
     "type" : "symfony-bundle",
     "authors" : [{
