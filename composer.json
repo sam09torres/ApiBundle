@@ -1,0 +1,24 @@
+{
+    "name" : "sam09torres/ApiBundle",
+    "description" : "Bundle to control any Api",
+    "type" : "symfony-bundle",
+    "authors" : [{
+        "name" : "Salve Safari",
+        "email" : "samft09@hotmail.fr"
+    }],
+    "keywords" : [
+        "api apibundle bundle christiana"
+    ],
+    "require" : {
+            "php" : ">=7.1.9",
+            "symfony/framework-bundle" : ">=2.5.6",
+            "twig/twig" : "*",
+            "doctrine/doctrine-bundle" : "*"
+    },
+    "autoload" : {
+        "psr-0" : {
+            "Christiana\\ApiBundle" : ""
+        }
+    },
+    "target-dir" : "Christiana/ApiBundle"
+}

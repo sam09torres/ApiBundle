@@ -1,0 +1,58 @@
+{% extends '@WebProfiler/Profiler/layout.html.twig' %}
+
+{% block toolbar %}
+    {% set icon %}
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAARgSURBVHhe7di/jlVVHMXxKSgoaKiUggSMD6EhUd/AjpKSlgSNNW9giZaUllTE0NBaWsgL0GnFn0Rj4uhvn/P1Jjvr7pl19j3drE+yM7l77fUj8xsyIZxFREREREREREREREREXE3/xq5Yq49e7IS1+ujFTlirj17shLX66MVOWKuPXuyEtfroCeIYYE2C2EdPEMcAaxLEPnqCOAZYkyD20RPEMcCaBLGPniCOAdYkiH30BHEMsCZB7KMniGOANQliHz1BHAOsSRD76AniGGBNgthHTxDHAGsSxD56gjgGWJMg9tETxDHAmgSxj54gPlmNerJO7DwhvhBvxfn5+Yc6r+v8WB+/4vnQ2lLEUxghiH30BPHJakm/MvKg3RFfiOeXqnkv69ylJngmiKcwQhD76Anik9RSPmWcaBnPhnhqqXl/1PmcaocngngKIwSxj54gPkkt5DvGiZbxbIintpr5e335hPrBmiriKYwQxD56gvgktZBfGCdaxrMhnm5Sc19SPyASxFMYIYh99ATxtFrE7TrnjBMtK7d5fhRPN6u5XzJiwbUgnsIIQeyjJ4in1RIeMWqoveH5UTw75uPqPq7zJ587df8DIxZcC+IpjBDEPnqCeFqNeLVOutArnh/FG0HcfsiPuerU/WueLLgWxFMYIYh99ATxlFrAR3X+YdRQe9PeUhM8E8Ttz7nFVafu3/FkwbUgnsIIQeyjJ4inVP3hOsXykJogF8T5AYzUAn5mzKXaW2qCJ4K4/TnfctWp+6v7K6iqN2sBf69TLsfbm9Q76wtVnVt1vqnzF1edun/KiAXXgngKIwSxj54g3qy++QeM6NT9m3b42Gkd6h3izWreF4xYcC2IpzBCEPvoCeLN6pt/zohO3X/fDh87rUO9Q7xJzZJfaUSCeAojBLGPniDepGo3agGjf5vfa4ePHTo3GHOwpr6a0/4r4g71gzVVxFMYIYh99ATxJrWA+9Q3a13GHBBZ2vLrfEa1wxNBPIURgthHTxBvUgv4ifpmrcuYA6JLVfdFfZG/+f9bXyniKYwQxD56gthWleu1iPdrezu61xm3WBNVb9/V+a3O0zrd//scQ00QT2GEIPbRE8S2WsTXVKe1GYxbcC2IbdQE8RRGCGIfPUFsq+U9ozqtzWDcgmtBbKMmiKcwQhD76AliWy3vLdVpbQbjFlwLYhs1QTyFEYLYR08Q26gdc40nB+1ujRRPFlwJYhs1QTyFEYLYR08Q26gJYkEsiBdcCWIbNUE8hRGC2EdPENuoCWJBLIgXXAliGzVBPIURgthHTxDHAGsSxD56gjgGWJMg9tETxDHAmgSxj54gjgHWJIh99ARxDLAmQeyjJ4hjgDUJYh89QRwDrEkQ++gJ4hhgTYLYR08QxwBrEsQ+eoI4BliTIPbRE8QxwJoEsY+eII4B1iSIffRiJ6zVRy92wlp99GInrNVHL3bCWn30Yies1UcvdsJaIyIiIiIiIiIiIiIiIq6Us7P/ANxzr09SkmdoAAAAAElFTkSuQmCC" alt="API" title="API">
+        <span> {{ collector.requests|length }} calls</span>
+    {% endset %}
+
+    {% set text %}
+        <div class="sf-toolbar-info-piece text-white {{ collector.requests|length > 0 ? 'bg-primary text-white' }} ">
+            <ul>
+                {% for Event in collector.requests %}
+                    <li>{{ Event.url }} {{ Event.date|date('d M Y h:i')}}</li>
+                    {% else %}
+                    <li>No Api Call</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endset %}
+
+    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { 'link': true }) }}
+{% endblock %}
+
+{% block head %}
+    {# Optional. Here you can link to or define your own CSS and JS contents. #}
+    {# Use {{ parent() }} to extend the default styles instead of overriding them. #}
+    {{ parent() }}
+{% endblock %}
+
+{% block menu %}
+    {# This left-hand menu appears when using the full-screen profiler. #}
+    <span class="label">
+        <span class="icon">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAARgSURBVHhe7di/jlVVHMXxKSgoaKiUggSMD6EhUd/AjpKSlgSNNW9giZaUllTE0NBaWsgL0GnFn0Rj4uhvn/P1Jjvr7pl19j3drE+yM7l77fUj8xsyIZxFREREREREREREREREXE3/xq5Yq49e7IS1+ujFTlirj17shLX66MVOWKuPXuyEtfroCeIYYE2C2EdPEMcAaxLEPnqCOAZYkyD20RPEMcCaBLGPniCOAdYkiH30BHEMsCZB7KMniGOANQliHz1BHAOsSRD76AniGGBNgthHTxDHAGsSxD56gjgGWJMg9tETxDHAmgSxj54gPlmNerJO7DwhvhBvxfn5+Yc6r+v8WB+/4vnQ2lLEUxghiH30BPHJakm/MvKg3RFfiOeXqnkv69ylJngmiKcwQhD76Anik9RSPmWcaBnPhnhqqXl/1PmcaocngngKIwSxj54gPkkt5DvGiZbxbIintpr5e335hPrBmiriKYwQxD56gvgktZBfGCdaxrMhnm5Sc19SPyASxFMYIYh99ATxtFrE7TrnjBMtK7d5fhRPN6u5XzJiwbUgnsIIQeyjJ4in1RIeMWqoveH5UTw75uPqPq7zJ587df8DIxZcC+IpjBDEPnqCeFqNeLVOutArnh/FG0HcfsiPuerU/WueLLgWxFMYIYh99ATxlFrAR3X+YdRQe9PeUhM8E8Ttz7nFVafu3/FkwbUgnsIIQeyjJ4inVP3hOsXykJogF8T5AYzUAn5mzKXaW2qCJ4K4/TnfctWp+6v7K6iqN2sBf69TLsfbm9Q76wtVnVt1vqnzF1edun/KiAXXgngKIwSxj54g3qy++QeM6NT9m3b42Gkd6h3izWreF4xYcC2IpzBCEPvoCeLN6pt/zohO3X/fDh87rUO9Q7xJzZJfaUSCeAojBLGPniDepGo3agGjf5vfa4ePHTo3GHOwpr6a0/4r4g71gzVVxFMYIYh99ATxJrWA+9Q3a13GHBBZ2vLrfEa1wxNBPIURgthHTxBvUgv4ifpmrcuYA6JLVfdFfZG/+f9bXyniKYwQxD56gthWleu1iPdrezu61xm3WBNVb9/V+a3O0zrd//scQ00QT2GEIPbRE8S2WsTXVKe1GYxbcC2IbdQE8RRGCGIfPUFsq+U9ozqtzWDcgmtBbKMmiKcwQhD76AliWy3vLdVpbQbjFlwLYhs1QTyFEYLYR08Q26gdc40nB+1ujRRPFlwJYhs1QTyFEYLYR08Q26gJYkEsiBdcCWIbNUE8hRGC2EdPENuoCWJBLIgXXAliGzVBPIURgthHTxDHAGsSxD56gjgGWJMg9tETxDHAmgSxj54gjgHWJIh99ARxDLAmQeyjJ4hjgDUJYh89QRwDrEkQ++gJ4hhgTYLYR08QxwBrEsQ+eoI4BliTIPbRE8QxwJoEsY+eII4B1iSIffRiJ6zVRy92wlp99GInrNVHL3bCWn30Yies1UcvdsJaIyIiIiIiIiIiIiIiIq6Us7P/ANxzr09SkmdoAAAAAElFTkSuQmCC" alt="API" title="API">
+        </span>
+        <strong>Request</strong>
+    </span>
+{% endblock %}
+
+{% block panel %}
+    <h2>Api requests</h2>
+    <table>
+        <tr>
+            <th>Calls</th>
+        </tr>
+
+        {% for Event in collector.requests %}
+        <tr>
+            <td>
+                <a href="{{ Event.url }}" target="_blank" class="sf-dump-str">{{ Event.url }}</a><br>
+                <p class="text-muted">{{ Event.message }}</p>
+                <p class="text-muted">{{ Event.response }}</p>
+            </td>
+            <td>{{ Event.date|date('d M Y h:i')}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

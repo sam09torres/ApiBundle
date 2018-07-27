@@ -1,0 +1,12 @@
+services:
+    ##PROFILER
+    Christiana\ApiBundle\DataCollector\ApiCollector:
+        tags:
+            -
+                name:     data_collector
+                template: '@Christiana/profiler/api_request.html.twig'
+                # must match the value returned by the getName() method
+                id:       'christiana.api.collector'
+                # optional priority
+                priority: 300
+        public: false

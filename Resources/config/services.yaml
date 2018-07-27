@@ -1,0 +1,24 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            #Christiana\ApiBundle\Api\EventBrite: '@christiana.api.eventbrite'
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+    ##CLASSES
+    Christiana\ApiBundle\:
+        resource: '../../*'
+        exclude: '../../{Entity,Migrations,Tests}'
+
+    Christiana\ApiBundle\Controller\:
+        resource: '../../Controller'
+        tags: ['controller.service_arguments']
+
+    christiana.api.eventbrite:
+        class: Christiana\ApiBundle\Api\EventBrite
+        arguments:
+            - '@cache.app'
+            - '@debug.event_dispatcher'
